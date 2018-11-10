@@ -24,13 +24,13 @@ namespace BitmapContainer
 		void CalculateIteration();
 		void CalculateTotalIterations();
 		void DrawFractal();
-		void AddZoom(const Zoom &zoom);
 		void WriteBitmap(string filename);
 
 	public:
 		FractalCreator(int width, int height);
 
 		void Run(string fileName);
+		void AddZoom(const Zoom &zoom);
 
 		virtual ~FractalCreator();
 	};

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "FractalCreator.h"
-
+#include "RGB.h"
 using namespace BitmapContainer;
 
 FractalCreator::FractalCreator(int width, int height)
@@ -62,6 +62,10 @@ void BitmapContainer::FractalCreator::DrawFractal()
 			uint8_t green = 0;
 			uint8_t blue = 0;
 
+			RGB startColor(35, 18, 100);
+			RGB endColor(220, 140, 160);
+			RGB colorDiff = endColor - startColor;
+
 			int iterations = m_fractal[y * m_width + x];
 
 			if (iterations != Mandelbrot::MAX_ITERATIONS)
@@ -71,7 +75,9 @@ void BitmapContainer::FractalCreator::DrawFractal()
 				{
 					hue += ((double)m_histogram[i]) / m_total;
 				}
-				red = 255 * hue;
+				red = startColor.r + colorDiff.r * hue;
+				green = startColor.g + colorDiff.g * hue;
+				blue = startColor.b + colorDiff.b * hue;
 			}
 			// changing the color  by the amout proportional by how many pixels ! 
 			m_bitmap.setPixel(x, y, red, green, blue);
