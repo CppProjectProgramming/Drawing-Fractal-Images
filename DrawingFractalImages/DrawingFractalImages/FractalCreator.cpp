@@ -22,6 +22,19 @@ void BitmapContainer::FractalCreator::Run(string fileName)
 }
 
 
+void BitmapContainer::FractalCreator::AddRange(double rangeEnd, const RGB &rgb)
+{
+	m_ranges.push_back(rangeEnd * Mandelbrot::MAX_ITERATIONS);
+	m_colors.push_back(rgb);
+}
+
+
+void BitmapContainer::FractalCreator::AddZoom(const Zoom &zoom)
+{
+	m_zoomList.add(zoom);
+}
+
+
 void BitmapContainer::FractalCreator::CalculateIteration()
 {
 	for (int y = 0; y < m_height; y++)
@@ -85,10 +98,6 @@ void BitmapContainer::FractalCreator::DrawFractal()
 	}
 }
 
-void BitmapContainer::FractalCreator::AddZoom(const Zoom &zoom)
-{
-	m_zoomList.add(zoom);
-}
 
 void BitmapContainer::FractalCreator::WriteBitmap(const string filename)
 {
