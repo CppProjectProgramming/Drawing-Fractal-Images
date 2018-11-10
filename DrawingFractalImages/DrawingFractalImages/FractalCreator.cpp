@@ -3,12 +3,22 @@
 
 using namespace BitmapContainer;
 
-FractalCreator::FractalCreator(int width, int height) 
+FractalCreator::FractalCreator(int width, int height)
 	: m_width(width), m_height(height), m_zoomList(m_width, m_height),
-	  m_bitmap(m_width, m_height), m_histogram(new int[Mandelbrot::MAX_ITERATIONS]{}),
-	  m_fractal(new int[m_width * m_height]{})
-{ 
+	m_bitmap(m_width, m_height), m_histogram(new int[Mandelbrot::MAX_ITERATIONS]{}),
+	m_fractal(new int[m_width * m_height]{})
+{
 	AddZoom(Zoom(m_width / 2, m_height / 2, 2.0 / m_width));
+}
+
+
+void BitmapContainer::FractalCreator::Run(string fileName)
+{
+	// Do not change the execution order coz it will miss up everything 
+	CalculateIteration();
+	CalculateTotalIterations();
+	DrawFractal();
+	WriteBitmap(fileName);
 }
 
 
@@ -34,7 +44,7 @@ void BitmapContainer::FractalCreator::CalculateIteration()
 
 void BitmapContainer::FractalCreator::CalculateTotalIterations()
 {
-	
+
 	for (int i = 0; i < Mandelbrot::MAX_ITERATIONS; i++)
 	{
 		m_total += m_histogram[i];

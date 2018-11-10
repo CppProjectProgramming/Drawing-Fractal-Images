@@ -19,16 +19,18 @@ namespace BitmapContainer
 		unique_ptr<int[]> m_histogram;
 		unique_ptr<int[]> m_fractal;
 		int m_total = 0;
-	public:
-		FractalCreator(int width, int height);
-
+		
+	private:
 		void CalculateIteration();
 		void CalculateTotalIterations();
 		void DrawFractal();
 		void AddZoom(const Zoom &zoom);
 		void WriteBitmap(string filename);
 
+	public:
+		FractalCreator(int width, int height);
 
+		void Run(string fileName);
 
 		virtual ~FractalCreator();
 	};
