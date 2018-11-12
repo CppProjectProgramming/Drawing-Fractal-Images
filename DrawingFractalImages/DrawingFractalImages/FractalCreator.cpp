@@ -53,11 +53,13 @@ void BitmapContainer::FractalCreator::CalculateRangeTotals()
 		m_rangeTotals[rangeIndex] += pixels;
 	}
 
-
+	int overallTotal = 0;
 	for (int val : m_rangeTotals)
 	{
 		cout << "Range Total : " << val << endl;
+		overallTotal += val;
 	}
+	cout << "Overall Total 1: " << overallTotal << endl;
 }
 
 
@@ -94,6 +96,8 @@ void BitmapContainer::FractalCreator::CalculateTotalIterations()
 	{
 		m_total += m_histogram[i];
 	}
+
+	cout << "Overall total 2 : " << m_total << endl;
 }
 
 void BitmapContainer::FractalCreator::DrawFractal()
