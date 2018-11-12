@@ -24,10 +24,14 @@ namespace BitmapContainer
 
 		vector<int> m_ranges;
 		vector<RGB> m_colors;
+		vector<int> m_rangeTotals;
+
+		bool m_bGotFirstRange = false;
 		
 	private:
 		void CalculateIteration();
 		void CalculateTotalIterations();
+		void CalculateRangeTotals();
 		void DrawFractal();
 		void WriteBitmap(string filename);
 

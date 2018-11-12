@@ -17,6 +17,7 @@ void BitmapContainer::FractalCreator::Run(string fileName)
 	// Do not change the execution order coz it will miss up everything 
 	CalculateIteration();
 	CalculateTotalIterations();
+	CalculateRangeTotals();
 	DrawFractal();
 	WriteBitmap(fileName);
 }
@@ -26,6 +27,37 @@ void BitmapContainer::FractalCreator::AddRange(double rangeEnd, const RGB &rgb)
 {
 	m_ranges.push_back(rangeEnd * Mandelbrot::MAX_ITERATIONS);
 	m_colors.push_back(rgb);
+
+	if (m_bGotFirstRange)
+	{
+		m_rangeTotals.push_back(0);
+	}
+
+	m_bGotFirstRange = true;
+
+}
+
+void BitmapContainer::FractalCreator::CalculateRangeTotals()
+{
+
+	int rangeIndex = 0;
+	for (int i = 0; i < Mandelbrot::MAX_ITERATIONS; i++)
+	{
+		int pixels = m_histogram[i];
+
+		if (i >= m_ranges[rangeIndex + 1])
+		{
+			rangeIndex++;
+		}
+
+		m_rangeTotals[rangeIndex] += pixels;
+	}
+
+
+	for (int val : m_rangeTotals)
+	{
+		cout << "Range Total : " << val << endl;
+	}
 }
 
 
