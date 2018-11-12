@@ -42,6 +42,8 @@ namespace BitmapContainer
 		void AddRange(double rangeEnd, const RGB &rgb);
 		void AddZoom(const Zoom &zoom);
 
+		int getRange(int iterations) const;
+
 		virtual ~FractalCreator();
 	};
 
